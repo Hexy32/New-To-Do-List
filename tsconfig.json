@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "watch": true,
+    "lib": ["DOM", "es2021", "es2021.intl"],
+    "removeComments": true,
+    "strict": true
+  }
+}

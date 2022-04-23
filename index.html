@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./css/style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./ts/app.js"></script>
+    <title>To-Do List</title>
+  </head>
+
+  <body>
+    <div class="content-wrapper">
+      <header>Your To-Do list.</header>
+      <div class="settings-input-wrapper" id="settingsWrapper">
+        <img class="star-empty input-star" src="./svgs/star_outline_black_24dp.svg" alt="Star Item">
+        <img style="display:none;" class="star input-star" src="./svgs/star_black_24dp.svg" alt="Unstar Item">
+        <textarea id="input" type="text" class="todo-input" placeholder="Input text to begin..." /></textarea>
+        <p class="info"><span>To-Do Items: </span><span>0</span></p>
+        <p class="info"><span>Completed Items: </span><span>0</span></p>
+        <p class="info"><span>Total Items: </span><span>0</span></p>
+      </div>
+      <ul id="list" class="todo-items">
+      </ul>
+    </div>
+  </body>
+</html>

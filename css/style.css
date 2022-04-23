@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --box-color: rgba(236, 236, 236, 0.333);
+  --box-color-completed: rgba(39, 255, 6, 0.333);
+  --box-color-starred: rgba(255, 255, 6, 0.333);
+  --box-color-completed-starred: rgba(168, 255, 6, 0.333);
+  --border-radius: 7px;
+  --box-color-empty: linear-gradient(
+    90deg,
+    rgba(236, 236, 236, 0.333),
+    rgba(236, 236, 236, 0.222) 53%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --text-color: #2e2e2e;
+  --total-items: 6;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--box-color) var(--box-color);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 20px 20px var(--box-color);
+  border: solid 4px transparent;
+}
+
+input[type='range'] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type='range']::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 36px;
+  width: 10px;
+  border-radius: 5px;
+  background: var(--text-color);
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  /* Add cool effects to your sliders! */
+}
+
+/* All the same stuff for Firefox */
+input[type='range']::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type='range']::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: var(--box-color);
+  border-radius: 5px;
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: var(--box-color);
+}
+
+input[type='range']::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type='range']::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type='range']::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type='range']:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type='range']::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type='range']:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  height: 100vh;
+  background: linear-gradient(
+    145deg,
+    rgb(140, 199, 239) 0%,
+    rgb(101, 160, 255) 49%,
+    rgb(207, 102, 252) 100%
+  );
+  padding: 50px;
+  color: var(--text-color);
+}
+
+.content-wrapper {
+  background-color: var(--box-color);
+  padding: 30px;
+  border-radius: 10px;
+  display: grid;
+  grid-template:
+    'header header header header header'
+    'input items items items items';
+  gap: 30px;
+  width: 100%;
+  max-width: 70rem;
+  height: max-content;
+  position: relative;
+}
+
+header {
+  font-size: 2rem;
+  grid-area: header;
+  text-align: center;
+  background-color: var(--box-color);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  font-weight: 900;
+  height: max-content;
+}
+
+.todo-items {
+  list-style: none;
+  grid-area: items;
+  display: grid;
+  gap: 10px;
+  height: calc(
+    (3.5rem * var(--total-items)) + (10px * var(--total-items) - 10px)
+  );
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: Y mandatory;
+  scroll-behavior: smooth;
+}
+
+.item {
+  scroll-snap-align: start;
+  background-color: var(--box-color);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  min-width: 30rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  transition: 500ms ease;
+  overflow: show;
+}
+
+.checkbox,
+.checkbox-empty {
+  height: 27px;
+  width: 27px;
+  position: absolute;
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.deleteSVG {
+  width: 35px;
+  cursor: pointer;
+}
+
+.content {
+  margin-left: 30px;
+  width: max-content;
+  overflow: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.completed {
+  background-color: var(--box-color-completed);
+  transition: 200ms ease;
+  animation: completed 500ms forwards;
+}
+
+.completed > .content {
+  position: relative;
+  text-decoration: line-through;
+}
+
+.placeholder-item {
+  background: var(--box-color-empty);
+}
+
+.placeholder-item > * {
+  display: none;
+}
+
+.settings-input-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  background-color: var(--box-color);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  display: flex;
+  box-shadow: 0 3px 0 0 rgba(128, 128, 128, 0.526);
+  cursor: pointer;
+  transition: 150ms ease;
+}
+
+.info:hover {
+  background-color: rgba(254, 254, 254, 0.55);
+  box-shadow: none;
+  transform: scale(0.98);
+  transform: translateY(3px);
+}
+
+.clicked-button {
+  background-color: rgba(254, 254, 254, 0.55);
+
+  box-shadow: none;
+  transform: scale(0.98);
+  transform: translateY(3px);
+}
+
+.info > *:last-child {
+  margin-left: auto;
+}
+
+.todo-input {
+  grid-area: input;
+  outline: none;
+  border: none;
+  background: var(--box-color);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-style: italic;
+  width: 100%;
+  resize: none;
+  flex-basis: 2;
+  flex-grow: 2;
+  position: relative;
+}
+
+.star,
+.star-empty {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.starred {
+  background-color: var(--box-color-starred);
+}
+
+.input-star {
+  margin-bottom: -45px;
+  opacity: 0.3;
+  z-index: 10;
+}
+
+.input-star:hover {
+  opacity: 1;
+}
+
+.starred.completed {
+  background-color: var(--box-color-completed-starred);
+}
+
+@keyframes completed {
+  50% {
+    transform: scale(0.97);
+  }
+
+  80% {
+    transform: scale(1.03);
+  }
+}
